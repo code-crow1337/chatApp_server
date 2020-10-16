@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import socketIO from 'socket.io';
+import {usernameAvailable, removeUsername,getData, addMessageToUser} from './utils';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -17,14 +18,32 @@ io.on('connection', (socket) => {
   console.log('New User connected');
   const clientId = socket.client.id;
   console.log('connected users', connectedUsers);
-  console.log('connect users client id', clientId);
+  socket.emit('connected', { isConnected: true });
   socket.on('newUser', (data) => {
-    socket.emit('response newUser', {
-      username: data.username,
-      id: clientId,
-    });
+    console.log(data.username);
+    const isAvailable = usernameAvailable(data.username, clientId);
+    if(isAvailable){
+      socket.emit('response newUser', {
+        available:true,
+        username: data.username,
+        id: clientId,
+      }); 
+      io.emit('data updated',{onlineUsers:getData()});
+    }else {
+      socket.emit('response newUser', {
+        available:false,
+        username: data.username,
+        id: clientId,
+      }); 
+    }
+  });
+  socket.on('send message', (request:any) => {
+    addMessageToUser(request.username, request.message);
+    console.log('teseting backend',getData());
+    io.emit('data updated',{onlineUsers:getData()});
   });
   socket.on('disconnect', () => {
+    removeUsername(clientId);
     console.log('Client disconnected', clientId);
   });
 });
