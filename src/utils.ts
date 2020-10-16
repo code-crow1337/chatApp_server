@@ -8,6 +8,7 @@ export function usernameAvailable(username: string, clientID:string):boolean {
     addUser(username, clientID); 
     return true; 
   }
+  console.log('users',users);
   return false;
 }
 

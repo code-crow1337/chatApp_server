@@ -21,6 +21,7 @@ io.on('connection', (socket) => {
   socket.emit('connected', { isConnected: true });
   socket.on('newUser', (data) => {
     console.log(data.username);
+    console.log('server', data.username)
     const isAvailable = usernameAvailable(data.username, clientId);
     if(isAvailable){
       socket.emit('response newUser', {
