@@ -8,7 +8,6 @@ export function usernameAvailable(username: string, clientID:string):boolean {
     addUser(username, clientID); 
     return true; 
   }
-  console.log('users',users);
   return false;
 }
 
@@ -33,7 +32,6 @@ export function addMessageToUser(username:string, message:string):void {
     }
     return user; 
   });
-  console.log('updatedMessage', updatedArr);
   users = updatedArr; 
 }
 

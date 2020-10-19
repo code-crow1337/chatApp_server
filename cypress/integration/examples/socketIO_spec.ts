@@ -2,26 +2,6 @@ import express from 'express';
 import io from 'socket.io-client';
 
 describe('Socket IO test', () => {
-  /*   let socket: any;
-  beforeEach((done) => {
-    socket = io.connect('http://localhost:4000');
-    socket.on('connect', () => {
-      console.log('success');
-      done();
-    });
-    socket.on('disconnect', () => {
-      console.log('disconnected');
-    });
-  });
-  afterEach((done) => {
-    if (socket.connected) {
-      console.log('disconnecting...');
-      socket.disconnect();
-    } else {
-      console.log('no connection to break...');
-    }
-    done();
-  }); */
 
   it('on new user on / should recive message and id', (done) => {
     const socket = io.connect('http://localhost:4000');

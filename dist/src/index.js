@@ -16,10 +16,7 @@ app.get('/', function (req, res) {
 });
 io.on('connection', function (socket) {
     var connectedUsers = Object.keys(io.sockets.connected).length;
-    console.log('New User connected');
     var clientId = socket.client.id;
-    console.log('connected users', connectedUsers);
-    console.log('connect users client id', clientId);
     socket.on('newUser', function (data) {
         socket.emit('response newUser', {
             username: data.username,
