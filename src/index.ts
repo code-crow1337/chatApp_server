@@ -9,15 +9,16 @@ app.set('port', PORT);
 const server = http.createServer(app);
 const io = socketIO(server);
 
-app.get('/', (req: express.Request, res: express.Response) => {
+app.get('/', (req: express.Request, res: express.Response):void => {
   res.send('OK');
 });
 
-io.on('connection', (socket) => {
+io.on('connection', (socket:socketIO.Socket):void => {
   const connectedUsers = Object.keys(io.sockets.connected).length;
   const clientId = socket.client.id;
   socket.emit('connected', { isConnected: true });
   socket.on('newUser', (data) => {
+
     const isAvailable = usernameAvailable(data.username, clientId);
     if(isAvailable){
       socket.emit('response newUser', {
