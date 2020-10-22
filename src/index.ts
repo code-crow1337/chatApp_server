@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const io = socketIO(server);
 app.use(cors());
 app.get('/', (req: express.Request, res: express.Response):void => {
-  res.send('OK');
+  res.send('This is the backend for code-crow1337\'s chatApp. Go here instead --> https://code-crow1337-chat-application.herokuapp.com/');
 });
 
 io.on('connection', (socket:socketIO.Socket):void => {
