@@ -15,7 +15,7 @@ var server = http_1.default.createServer(app);
 var io = socket_io_1.default(server);
 app.use(cors_1.default());
 app.get('/', function (req, res) {
-    res.send('OK');
+    res.send('This is the backend for code-crow1337\'s chatApp. Go here instead --> https://code-crow1337-chat-application.herokuapp.com/');
 });
 io.on('connection', function (socket) {
     var connectedUsers = Object.keys(io.sockets.connected).length;
